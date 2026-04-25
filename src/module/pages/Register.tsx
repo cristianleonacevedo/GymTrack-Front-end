@@ -1,9 +1,10 @@
 import "tailwindcss";
 import { useState } from "react";
-import { loginRequest } from "../services/Auth.service";
 import Navbar from "../../design/molecule/Navbar";
 import Background1 from "../../design/images/Background1.jpg";
 import RegisterForm from "../../design/organism/RegisterForm";
+import { registerRequest } from "../services/register.service";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [form, Setform] = useState({
@@ -17,13 +18,19 @@ function Register() {
     password: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      console.log(form);
+      await registerRequest(form);
+
+      alert("Usuario registrado correctamente");
+      navigate("/login");
     } catch (error) {
       console.error(error);
+      alert("Error al registrar usuario");
     }
   };
 
@@ -41,7 +48,7 @@ function Register() {
       className="min-h-screen items-center justify-center bg-cover bg-center h-screen"
     >
       <Navbar />
-      <RegisterForm 
+      <RegisterForm
         form={form}
         onChange={handleChange}
         onSubmit={handleSubmit}

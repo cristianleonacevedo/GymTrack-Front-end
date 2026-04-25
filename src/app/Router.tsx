@@ -10,11 +10,11 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
         <Route
-          path="/Home"
+          path="/home"
           element={
             <ProtectedRoute>
               <Home />

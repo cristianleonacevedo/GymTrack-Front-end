@@ -3,33 +3,30 @@ import { Button, Input } from "../../design/atomic";
 import Background1 from "../../design/images/Background1.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginRequest } from "../services/Auth.service";
 
 function Login() {
   const [email, Setemail] = useState("");
   const [password, Setpassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const storedUser = localStorage.getItem("User");
+    try {
+      const res = await loginRequest({ email, password });
 
-    if (!storedUser) {
-      alert("Usuario no registrado");
-      return;
-    }
+      localStorage.setItem("token", res.access_token);
+      localStorage.setItem("refresh_token", res.refresh_token);
+      localStorage.setItem("isAuth", "true");
 
-    const user = JSON.parse(storedUser);
-
-    if (user.email === email && user.password === password) {
-      localStorage.set("isAuth", "true");
-      alert("Logueado exitosamente");
-      console.log("bienvenido", user.name);
       navigate("/home");
-    } else {
+    } catch (error) {
+      console.error(error);
       alert("Credenciales incorrectas");
     }
   };
+
   return (
     <div
       className="min-h-screen items-center justify-center bg-cover bg-center h-screen"

@@ -1,33 +1,30 @@
 import "tailwindcss";
-import { useEffect, useState } from "react";
 import { Navbar } from "../../design/molecule";
 import { Card } from "../../design/atomic";
 import { ClassItem, InfoItem, SectionHeader } from "../../design/molecule";
-import { getClasses, getMembership, getActivity } from "../services/Homer.services";
-import type { GymClass } from "../types/class.types";
-import type { Membership, Activity } from "../types/user.types";
+import { useHomeData } from "../hooks/useHomeData";
+
 function Home() {
-  const [classes, SetClasses] = useState<GymClass[]>([])
-  const [membership, setMembership] = useState<Membership | null>(null)
-  const [activity, setActivity] = useState<Activity | null>(null)
+  const { classes, membership, activity, loading, error } = useHomeData();
 
-  useEffect(() =>{
-    const fetchData = async () => {
-      try {
-        const classesData = await getClasses()
-        const membershipData = await getMembership()
-        const activityData = await getActivity()
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <p className="p-6">Cargando datos del gimnasio...</p>
+      </>
+    );
+  }
 
-        SetClasses(classesData)
-        setMembership(membershipData)
-        setActivity(activityData)
-      } catch (error) {
-        console.error("Error al cargar los datos:", error)
-      }
-    }
+  if (error) {
+    return (
+      <>
+        <Navbar />
+        <p className="p-6 text-red-500">{error}</p>
+      </>
+    );
+  }
 
-    fetchData();
-  }, [])
   return (
     <>
       <Navbar />
@@ -41,47 +38,56 @@ function Home() {
           <Card className="md:col-span-2 bg-orange-400">
             <SectionHeader tittle="Membresia" />
             <InfoItem label="Plan" value={membership?.plan ?? "Cargando..."} />
-            <InfoItem label="Días restantes" value={membership?.dias_restantes ?? "..."} />
+            <InfoItem
+              label="Días restantes"
+              value={membership?.dias_restantes ?? "..."}
+            />
           </Card>
 
           <Card>
             <SectionHeader tittle="Clases disponibles" />
-            
-            {classes.length === 0 ?(
+
+            {classes.length === 0 ? (
               <p>Cargando Clases...</p>
             ) : (
-              classes.slice(0, 3). map((c) =>(
-                <ClassItem 
-                  key= {c.id} 
-                  name= {c.nombre}
-                  time= {c.hora_inicio} 
-                  status= {c.estado} 
-                />
-              ))
+              classes
+                .slice(0, 3)
+                .map((c) => (
+                  <ClassItem
+                    key={c.id}
+                    name={c.nombre}
+                    time={c.hora_inicio}
+                    status={c.estado}
+                  />
+                ))
             )}
           </Card>
 
           <Card>
             <SectionHeader tittle="Mis Clases" />
 
-            {classes.length === 0 ?(
+            {classes.length === 0 ? (
               <p>Cargando Clases...</p>
             ) : (
-              classes.filter((c) => c.estado === "RESERVADA")
-                .map((c) =>(
-                <ClassItem 
-                  key= {c.id} 
-                  name= {c.nombre}
-                  time= {c.hora_inicio} 
-                  status= {c.estado} 
-                />
-              ))
+              classes
+                .filter((c) => c.estado === "RESERVADA")
+                .map((c) => (
+                  <ClassItem
+                    key={c.id}
+                    name={c.nombre}
+                    time={c.hora_inicio}
+                    status={c.estado}
+                  />
+                ))
             )}
           </Card>
 
           <Card className="md:col-span-1">
             <SectionHeader tittle="Mi actividad" />
-            <InfoItem label="Visitas este mes" value={activity?.total_visitas ?? "..."} />
+            <InfoItem
+              label="Visitas este mes"
+              value={activity?.total_visitas ?? "..."}
+            />
           </Card>
         </div>
       </div>

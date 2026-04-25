@@ -5,10 +5,10 @@ type Props = {
 };
 
 function ProtectedRoute({ children }: Props) {
-  const isAuth = localStorage.getItem("isAuth");
+  const token = localStorage.getItem("token");
 
-  if (!isAuth) {
-    <Navigate to="/login" />;
+  if (!token) {
+    return <Navigate to="/login" replace />;
   }
 
   return children;
