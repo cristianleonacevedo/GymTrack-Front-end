@@ -16,9 +16,8 @@ export default function Router() {
         <Route
           path="/home"
           element={
-            <ProtectedRoute>
               <Home />
-            </ProtectedRoute>
+
           }
         />
       </Routes>

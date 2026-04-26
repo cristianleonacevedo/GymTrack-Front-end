@@ -28,38 +28,40 @@ function Login() {
   };
 
   return (
-    <div
-      className="min-h-screen items-center justify-center bg-cover bg-center h-screen"
-      style={{ backgroundImage: `url(${Background1})` }}
-    >
+  <>
       <Navbar />
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white rounded p-2 pt-0 border-2 w-80"
+      <div
+        className="min-h-screen flex items-center justify-center bg-cover bg-center min-h-screen"
+        style={{ backgroundImage: `url(${Background1})` }}
       >
-        <h1 className="font-bold text-center mb-4 bg-blue-100 ">
-          Inicia sesión
-        </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded p-2 pt-0 border-2 w-80"
+        >
+          <h1 className="font-bold text-center mb-4 bg-blue-100 ">
+            Inicia sesión
+          </h1>
 
-        <Input
-          type="email"
-          value={email}
-          placeholder="Email"
-          onChange={(e) => Setemail(e.target.value)}
-          className="w-full mb-4 p-2 border-2 rounded"
-        />
+          <Input
+            type="email"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => Setemail(e.target.value)}
+            className="w-full mb-4 p-2 border-2 rounded"
+          />
 
-        <Input
-          type="password"
-          value={password}
-          placeholder="Password"
-          onChange={(e) => Setpassword(e.target.value)}
-          className="w-full mb-4 p-2 border-2 rounded"
-        />
+          <Input
+            type="password"
+            value={password}
+            placeholder="Password"
+            onChange={(e) => Setpassword(e.target.value)}
+            className="w-full mb-4 p-2 border-2 rounded"
+          />
 
-        <Button text="Entrar" />
-      </form>
-    </div>
+          <Button text="Entrar" type="submit"/>
+        </form>
+      </div>
+    </>
   );
 }
 

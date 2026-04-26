@@ -45,7 +45,7 @@ function Register() {
     <div
       id="BackgroundR"
       style={{ backgroundImage: `url(${Background1})` }}
-      className="min-h-screen items-center justify-center bg-cover bg-center h-screen"
+      className="min-h-screen items-center justify-center bg-cover bg-center min-h-screen"
     >
       <Navbar />
       <RegisterForm

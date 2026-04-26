@@ -14,7 +14,7 @@ export default function RegisterForm({ form, onChange, onSubmit }: Props) {
     <div
       id="BackgroundR"
       style={{ backgroundImage: `url(${Background1})` }}
-      className="min-h-screen pt-16 flex items-center justify-center bg-cover bg-center h-screen"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center h-screen"
     >
       <form
         id="RegisterForm"
@@ -72,7 +72,7 @@ export default function RegisterForm({ form, onChange, onSubmit }: Props) {
         />
 
         <Input
-          type="text"
+          type="date"
           placeholder="Fecha De Nacimiento"
           value={form.fecha_nacimiento}
           onChange={(e) => onChange("fecha_nacimiento", e.target.value)}
@@ -87,7 +87,7 @@ export default function RegisterForm({ form, onChange, onSubmit }: Props) {
           className="w-full mb-4 p-2"
         />
 
-        <Button text="Register" />
+        <Button text="Register" type="submit"/>
       </form>
     </div>
   );

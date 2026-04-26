@@ -23,13 +23,15 @@ function Button({
   };
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-    >
-      {text}
-    </button>
+    <div className="flex justify-center">
+      <button
+        type={type}
+        onClick={onClick}
+        className={`${baseStyles} ${variants[variant]} ${className}`}
+      >
+        {text}
+      </button>
+    </div>
   );
 }
 
