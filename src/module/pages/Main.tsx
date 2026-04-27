@@ -9,13 +9,10 @@ function Main() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* NAVBAR */}
       <Navbar />
 
-      {/* HERO SECTION */}
       <Banner />
 
-      {/* MAIN CONTENT */}
       <div className="max-w-5xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
           GymTrack
@@ -27,7 +24,6 @@ function Main() {
           El sistema de gestión fitness más eficiente para tu gimnasio.
         </p>
 
-        {/* CTA BUTTONS */}
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <Button text="Iniciar sesión" onClick={() => navigate("/login")} />
 
