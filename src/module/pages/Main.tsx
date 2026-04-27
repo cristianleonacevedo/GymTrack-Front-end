@@ -31,7 +31,6 @@ function Main() {
         </div>
       </div>
 
-      {/* FEATURES SECTION */}
       <div className="bg-orange-400/20 py-16">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
           <div className="bg-white rounded-2xl p-6 shadow">
